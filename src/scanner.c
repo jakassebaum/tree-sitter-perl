@@ -1,6 +1,37 @@
-#include "tree_sitter/array.h"
 #include "tree_sitter/parser.h"
 #include "tsp_unicode.h"
+#include <stdlib.h>
+#include <string.h>
+
+// Simple array implementation to replace removed tree-sitter Array
+#define Array(T) struct { T *contents; uint32_t size; uint32_t capacity; }
+
+#define array_init(self) \
+  ((self)->contents = NULL, (self)->size = 0, (self)->capacity = 0)
+
+#define array_delete(self) \
+  (free((self)->contents), (self)->contents = NULL, (self)->size = 0, (self)->capacity = 0)
+
+#define array_push(self, element) \
+  (((self)->size == (self)->capacity) ? \
+    ((self)->capacity = (self)->capacity ? (self)->capacity * 2 : 1, \
+     (self)->contents = realloc((self)->contents, (self)->capacity * sizeof(*(self)->contents))) : 0, \
+   (self)->contents[(self)->size++] = (element))
+
+#define array_get(self, index) \
+  ((self)->contents + (index))
+
+#define array_back(self) \
+  ((self)->contents + (self)->size - 1)
+
+#define array_erase(self, index) \
+  (memmove((self)->contents + (index), (self)->contents + (index) + 1, \
+           ((self)->size - (index) - 1) * sizeof(*(self)->contents)), \
+   (self)->size--)
+
+#define array_reserve(self, new_capacity) \
+  ((self)->capacity = (new_capacity), \
+   (self)->contents = realloc((self)->contents, (self)->capacity * sizeof(*(self)->contents)))
 
 // grumble grumble no stdlib
 static char *tsp_strchr(register const char *s, int c) {
