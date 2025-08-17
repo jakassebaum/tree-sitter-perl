@@ -1,7 +1,8 @@
 {
   "name": "tree-sitter-perl",
   "version": "1.0.0",
-  "description": "A tree-sitter parser, for Perl!",
+  "description": "A tree-sitter parser, for Perl! (Node.js v24+ compatible)",
+  "repository": "https://github.com/jakassebaum/tree-sitter-perl",
   "main": "bindings/node",
   "types": "bindings/node",
   "scripts": {
@@ -16,11 +17,11 @@
   "author": "veesh",
   "license": "ISC",
   "dependencies": {
-    "node-addon-api": "^7.1.0",
-    "node-gyp-build": "^4.8.0"
+    "node-addon-api": "^8.5.0",
+    "node-gyp-build": "^4.8.4"
   },
   "peerDependencies": {
-    "tree-sitter": "^0.21.0"
+    "tree-sitter": "^0.25.0"
   },
   "peerDependenciesMeta": {
     "tree_sitter": {
@@ -34,7 +35,7 @@
     "eslint-plugin-n": "^15.2.4",
     "eslint-plugin-promise": "^6.0.0",
     "prebuildify": "^6.0.0",
-    "tree-sitter-cli": "^0.24.2"
+    "tree-sitter-cli": "^0.25.8"
   },
   "files": [
     "grammar.js",
