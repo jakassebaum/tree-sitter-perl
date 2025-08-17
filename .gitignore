@@ -8,6 +8,12 @@ package-lock.json
 *.dylib
 *.so
 *.o
-src/*
+src/parser.c
+src/node-types.json
+src/grammar.json
+# Allow tree_sitter header files needed for builds
+!src/tree_sitter/
+!src/scanner.c
+!src/*.h
 tree-sitter-perl.wasm
 log.html
